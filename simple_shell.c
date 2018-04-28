@@ -43,6 +43,7 @@ int main()
 	  for (i = 1; i < counter; i++) {
 	    tmp = unescape(arg[i],errf);
 	    printf("%s ",unescape(arg[i],errf));
+	    // must free memory after use
 	    free(tmp);
 	  }
 	  printf("\n");
