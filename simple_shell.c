@@ -27,13 +27,26 @@ int main()
       arg[counter++] = temp;
       temp = strtok(NULL, " ");
     }
-
+    
     //replace echo functionality
     if (strcmp(arg[0], "echo") == 0 || strcmp(arg[0], "/bin/echo") == 0){
 	FILE *errf = NULL;	
+	int i;
 	char *tmp;
-	tmp = unescape(arg[1],errf);	  
-	printf(tmp);
+	if (arg[2] == NULL) {
+	  tmp = unescape(arg[1],errf);
+	  printf(tmp);
+	  // must free memory after use
+	  free(tmp);
+	}
+	else{
+	  for (i = 1; i < counter; i++) {
+	    tmp = unescape(arg[i],errf);
+	    printf("%s ",unescape(arg[i],errf));
+	    free(tmp);
+	  }
+	  printf("\n");
+	}
 	//skip built-in commands
 	continue;
     }
